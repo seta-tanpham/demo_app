@@ -3,7 +3,8 @@ import {
     ADD_USER_SUCCESS,
     ADD_USER_FAILURE,
     FETCH_USERS_SUCCESS,
-    DELETE_USERS_REQUEST
+    DELETE_USERS_REQUEST,
+    EDIT_USER_REQUEST
   } from '../actions/userAction';
   
   const initialState = {
@@ -39,7 +40,14 @@ import {
       case DELETE_USERS_REQUEST:
         return {
           ...state,
-          users: state.users.filter(user => user.name !== action.payload)
+          users: state.users.filter(user => user.id !== action.payload)
+        };
+      case EDIT_USER_REQUEST:
+        return {
+          ...state,
+          users: state.users.map(user => 
+            user.id === action.payload.id ? action.payload : user
+          )
         };
       default:
         return state;
