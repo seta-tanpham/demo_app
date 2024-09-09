@@ -1,5 +1,9 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { ADD_USER_REQUEST, addUserSuccess, addUserFailure, fetchUsersSuccess, deleteUserRequest, DELETE_USERS_REQUEST, EDIT_USER_REQUEST, editUserRequest } from '../actions/userAction';
+import { 
+  ADD_USER_REQUEST, addUserSuccess,
+  addUserFailure, fetchUsersSuccess,
+  deleteUserRequest, DELETE_USERS_REQUEST, 
+  EDIT_USER_REQUEST, editUserRequest } from '../actions/userAction';
 
 // Mock API call
 const apiAddUser = (user) => {
@@ -71,18 +75,6 @@ function* addUserSaga(action) {
   }
 }
 
-export function* watchAddUserSaga() {
-  yield takeLatest(ADD_USER_REQUEST, addUserSaga);
-}
-
-export function* watchDeleteUserSaga() {
-  yield takeLatest(DELETE_USERS_REQUEST, deleteUserSaga);
-}
-
-export function* watchEditUserSaga() {
-  yield takeLatest(EDIT_USER_REQUEST, editUserSaga);
-}
-
 // Add this saga if you have an API to fetch users
 function* fetchUsersSaga() {
     try {
@@ -96,4 +88,17 @@ function* fetchUsersSaga() {
 // Add this line to watch fetch users
 export function* watchFetchUsersSaga() {
   yield takeLatest('FETCH_USERS_REQUEST', fetchUsersSaga);
+}
+
+
+export function* watchAddUserSaga() {
+  yield takeLatest(ADD_USER_REQUEST, addUserSaga);
+}
+
+export function* watchDeleteUserSaga() {
+  yield takeLatest(DELETE_USERS_REQUEST, deleteUserSaga);
+}
+
+export function* watchEditUserSaga() {
+  yield takeLatest(EDIT_USER_REQUEST, editUserSaga);
 }
